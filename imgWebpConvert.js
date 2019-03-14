@@ -1,5 +1,5 @@
-//html > head
-//<script src="2019/js/webpjs.js"></script>
+// html > head
+// http://webpjs.appspot.com
 
 var webp = require('webp-converter');
 var fs = require('fs');
