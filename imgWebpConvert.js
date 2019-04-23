@@ -23,7 +23,9 @@ let convertImg = (way, fileName, quality = '-q 80') => new Promise(r=> webp.cweb
             
             await sharpImg(`${way}/src/${file}`, `${way}/dist/${fileName}.jpg`);
 
-            console.log(process.argv)
-            await convertImg(way, fileName, '-q 80');
+            let quality = process.argv.match(/q{1}\d+/g);
+            if (quality) quality = quality[0];
+
+            await convertImg(way, fileName, quality);
     }
 })();
