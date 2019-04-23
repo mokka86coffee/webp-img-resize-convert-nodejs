@@ -1,0 +1,24 @@
+{
+  "name": "webp-img-resize-convert-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "imgWebpConvert.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mokka86coffee/webp-img-resize-convert-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mokka86coffee/webp-img-resize-convert-nodejs/issues"
+  },
+  "homepage": "https://github.com/mokka86coffee/webp-img-resize-convert-nodejs#readme",
+  "devDependencies": {
+    "sharp": "^0.22.0",
+    "webp-converter": "^2.2.2"
+  }
+}
