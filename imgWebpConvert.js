@@ -8,8 +8,8 @@ const sharp = require('sharp');
 
 let promReadDir = (way) => new Promise(r=> fs.readdir( way, (err, items) => r(items) ) );
 let promFileStat = (file) => new Promise(r=> fs.stat( file, (err, stats) => r( +(stats["size"]/1000).toFixed() ) ) );
-let sharpImg = (file, outputWay, size = 1000) => new Promise( r => { sharp(file).resize(size).toFile( outputWay ); r();} );
-let convertImg = (way, fileName, quality = '-q 80') => new Promise(r=> webp.cwebp(`${way}/src/${fileName}.jpg`,`dist/${fileName}.webp`, quality, (status,error) => r() ) );
+let sharpImg = (file, outputWay, size) => new Promise( r => { sharp(file).resize(size || 800).toFile( outputWay ); r();} );
+let convertImg = (way, fileName, quality) => new Promise(r=> webp.cwebp(`${way}/src/${fileName}.jpg`,`dist/${fileName}.webp`, quality || '-q 80', (status,error) => r() ) );
 
 
 (async ()=>{
