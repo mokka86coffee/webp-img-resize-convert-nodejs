@@ -9,7 +9,7 @@ const sharp = require('sharp');
 let promReadDir = (way) => new Promise(r=> fs.readdir( way, (err, items) => r(items) ) );
 let promFileStat = (file) => new Promise(r=> fs.stat( file, (err, stats) => r( +(stats["size"]/1000).toFixed() ) ) );
 let sharpImg = (file, outputWay, size) => new Promise( r => { sharp(file).resize(size || 800).toFile( outputWay ); r();} );
-let convertImg = (way, fileName, quality) => new Promise(r=> webp.cwebp(`${way}/src/${fileName}.jpg`,`dist/${fileName}.webp`, quality || '-q 85', (status,error) => r() ) );
+let convertImg = (way, fileName, quality) => new Promise(r=> webp.cwebp(`${way}/dist/${fileName}.jpg`,`dist/${fileName}.webp`, quality || '-q 85', (status,err) => err ? console.log(err) : r() ) );
 
 
 (async ()=>{
@@ -18,8 +18,8 @@ let convertImg = (way, fileName, quality) => new Promise(r=> webp.cwebp(`${way}/
     let files = await promReadDir(`${way}/src`);
         
     for (let file of files) {
-            let fileName = file.replace(/\.(jpg|png)$/g, '');
-            let fileSize = await promFileStat(`${way}\\src\\${file}`);
+            let fileName = file.replace(/(\.(jpg|png)$|\s)/g, '');
+            let fileSize = await promFileStat(`${way}/src/${file}`);
 
             let imgSize = process.argv.includes(/s{1}\d+/g);
             if (imgSize) imgSize = imgSize[0];
