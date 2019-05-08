@@ -64,7 +64,7 @@ async function checkForBrokenImgs (links, page, errorCounter) {
         }
     }
 
-}
+} // проверка картинок на странице
 
 async function getImgsLinksFromPage (pageUrl) {
 
