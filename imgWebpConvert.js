@@ -18,7 +18,7 @@ let convertImg = (way, fileName, quality) => new Promise(r=> webp.cwebp(`${way}/
     let files = await promReadDir(`${way}/src`);
         
     for (let file of files) {
-            const extension = '.' + file.match(/\..+/)[0];
+            const extension = file.match(/\..+/)[0];
             let fileName = file.replace(/(\.(jpg|png)$|\s)/, '');
             let fileSize = await promFileStat(`${way}/src/${file}`);
 
