@@ -9,7 +9,7 @@ const sharp = require('sharp');
 let promReadDir = (way) => new Promise(r=> fs.readdir( way, (err, items) => r(items) ) );
 let promFileStat = (file) => new Promise(r=> fs.stat( file, (err, stats) => r( +(stats["size"]/1000).toFixed() ) ) );
 let sharpImg = (file, outputWay, size) => new Promise( r => { sharp(file).resize(size || 800).toFile( outputWay ); r();} );
-let convertImg = (way, fileName, quality) => new Promise(r=> webp.cwebp(`${way}/src/${fileName}`,`dist/${fileName}.webp`, quality || '-q 85', (status,err) => err ? console.log(err) : r() ) );
+let convertImg = ({way, fileName, extension, quality}) => new Promise(r=> webp.cwebp(`${way}/src/${fileName}${extension}`,`dist/${fileName}.webp`, quality || '-q 85', (status,err) => err ? console.log(err) : r() ) );
 
 
 (async ()=>{
@@ -30,6 +30,6 @@ let convertImg = (way, fileName, quality) => new Promise(r=> webp.cwebp(`${way}/
             let quality = process.argv.includes(/q{1}\d+/g);
             if (quality) quality = quality[0];
 
-            await convertImg(way, fileName + extension, quality);
+            await convertImg({way, fileName, extension, quality});
     }
 })();
